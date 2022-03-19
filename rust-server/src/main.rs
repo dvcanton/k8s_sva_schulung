@@ -37,7 +37,7 @@ async fn main() -> tide::Result<()> {
 			app.at("/word").post(get_word);
 			app.listen(
 				TlsListener::build()
-					.addrs("127.0.0.1:4433")
+					.addrs("0.0.0.0:4433")
 					.cert(cert)
 					.key(key),
 				)
@@ -48,7 +48,7 @@ async fn main() -> tide::Result<()> {
 		}
 	} else {
 		app.at("/word").post(get_word);
-		app.listen("127.0.0.1:9090").await?;
+		app.listen("0.0.0.0:9090").await?;
 		eprintln!("Listening on port 9090..");
 	}
     Ok(())
