@@ -1,6 +1,6 @@
 <script>
-// export const serverURL = 'BACKEND_SERVER:BACKEND_PORT'
-export const serverURL = 'https://10.10.146.165:4433'
+export const serverURL = 'BACKEND_SERVER:BACKEND_PORT'
+//export const serverURL = 'https://10.10.146.165:4433'
 //export const serverURL = 'https://localhost:4433'
 //export const serverURL = 'http://localhost:9090'
 
