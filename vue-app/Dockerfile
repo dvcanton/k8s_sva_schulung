@@ -24,4 +24,4 @@ RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 # CMD [ "http-server", "dist" ]
-CMD [ "bash" ]
+# CMD [ "bash" ]

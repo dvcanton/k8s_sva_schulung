@@ -8,3 +8,5 @@ do
   sed -i 's|BACKEND_SERVER|'${BACKEND_SERVER}'|g' $file
   sed -i 's|BACKEND_PORT|'${BACKEND_PORT}'|g' $file
 done
+
+npm run dev
