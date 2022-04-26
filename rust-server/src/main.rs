@@ -35,6 +35,7 @@ async fn main() -> tide::Result<()> {
 	if ssl {
 		if let (Ok(cert), Ok(key)) = (env::var("CERT_PATH"), env::var("KEY_PATH")) {
 			app.at("/word").post(get_word);
+			app.at("/").get(ca_trust_thanks);
 			app.listen(
 				TlsListener::build()
 					.addrs("0.0.0.0:4433")
@@ -62,5 +63,11 @@ async fn get_word(_req: Request<()>) -> tide::Result {
     let body = Body::from_json(&json_response)?;
     let mut res = Response::new(201);
 	res.set_body(body);
+	Ok(res)
+}
+
+async fn ca_trust_thanks(_req: Request<()>) -> tide::Result {
+	let mut res = Response::new(201);
+	res.set_body("Thanks for trusting our CA.");
 	Ok(res)
 }

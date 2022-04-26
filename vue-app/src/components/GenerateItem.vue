@@ -1,4 +1,9 @@
 <script>
+// export const serverURL = 'BACKEND_SERVER:BACKEND_PORT'
+// export const serverURL = 'https://10.10.146.136:4433'
+//export const serverURL = 'https://localhost:4433'
+//export const serverURL = 'http://localhost:9090'
+
 export default {
   data() {
     return {
@@ -8,8 +13,10 @@ export default {
   methods: {
     request() {
       // update component state
-      fetch("http://localhost:8080/word", { 
+	  console.log(serverURL);
+      fetch(serverURL + "/word", { 
     		method: "POST",
+            mode: "cors",
     		headers: { "Content-Type": "application/json" }
 		})
         .then(response => {

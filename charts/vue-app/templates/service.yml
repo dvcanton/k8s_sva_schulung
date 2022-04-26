@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: generator-vue-app
+  name: generator-vue-app
+spec:
+  ports:
+  - port: {{ .Values.port }}
+    protocol: TCP
+    targetPort: {{ .Values.port }}
+	nodePort: {{ .Values.nodePort }}
+  selector:
+    app: generator-vue-app
+  sessionAffinity: None
+  type: NodePort

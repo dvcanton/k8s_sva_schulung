@@ -1,0 +1,9 @@
+
+replicas: 1
+image: dvcanton/wordle-generator-app
+tag: 0.0.1
+
+port: 8080
+nodePort: 30007
+
+backend: wordle-generator-app.svc

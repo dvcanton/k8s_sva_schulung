@@ -23,6 +23,8 @@ generate() {
 		openssl genrsa -out ca_key.pem 2048
 		# Self-signed root CA 
 		openssl req -x509 -sha256 -new -nodes -key ca_key.pem -days 3650 -out ca_cert.pem
+		openssl x509 -outform der -in ca_cert.pem -out ca_cert.crt
+
 		;;
 
 	server_cert)

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: generator-vue-app
+  name: generator-vue-app-vue-app
+spec:
+  progressDeadlineSeconds: 600
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: generator-vue-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: generator-vue-app
+    spec:
+      containers:
+      - env:
+	      - name: VUE_APP_SERVER_URL
+		    value: {{ .Values.backend | default "wordle-generator-app" }}
+	    image: {{ .Values.image }}:{{ .Values.tag }}
+        imagePullPolicy: Always
+        name: wordle-generator-app
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
