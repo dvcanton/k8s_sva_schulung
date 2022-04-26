@@ -9,4 +9,4 @@ do
   sed -i 's|BACKEND_PORT|'${BACKEND_PORT}'|g' $file
 done
 
-npm run dev
+npm run serve --host 0.0.0.0
