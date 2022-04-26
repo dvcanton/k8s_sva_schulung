@@ -14,15 +14,13 @@ COPY . .
 RUN chmod 777 -R .
 RUN chmod 777 -R /root
 
-# Replacing env constants in JS
-for file in src/components/*.vue* ;
-do
-  sed -i 's|BACKEND_SERVER|'${BACKEND_SERVER}'|g' $file
-  sed -i 's|BACKEND_PORT|'${BACKEND_PORT}'|g' $file
-done
-
-
 RUN npm run build
 
-EXPOSE 8080
+# Copy entrypoint script as /entrypoint.sh
+COPY ./entrypoint.sh /entrypoint.sh
+
+# Grant Linux permissions and run entrypoint script
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
 CMD [ "http-server", "dist" ]
