@@ -6,10 +6,9 @@ metadata:
   name: generator-vue-app
 spec:
   ports:
-  - port: {{ .Values.port }}
+  - port: 3000
     protocol: TCP
-    targetPort: {{ .Values.port }}
-	nodePort: {{ .Values.nodePort }}
+    targetPort: 3000
   selector:
     app: generator-vue-app
   sessionAffinity: None

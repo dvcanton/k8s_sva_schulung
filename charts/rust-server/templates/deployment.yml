@@ -22,39 +22,36 @@ spec:
         app: generator-rust-server
     spec:
       containers:
-      - env:
-	      {{ if .Values.ssl.enabled }}
-	      - name: ENABLE_SERVER_SSL
-		    value: "true"
-		  - name: CERT_PATH
-		    value: /etc/tls/server_cert.pem
-		  - name: KEY_PATH
-		    value: /etc/tls/server_key.pem
-		  {{- end }}
       - image: {{ .Values.image }}:{{ .Values.tag }}
         imagePullPolicy: Always
         name: generator-server
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
-		volumeMounts:
-		- name: tls-cert
-		  mountPath: "/etc/tls"
-		  readOnly: true
-		- name: tls-key
-		  mountPath: "/etc/tls"
-		  readOnly: true
+        
+        {{- if .Values.ssl.enabled }}
+        env:
+        - name: ENABLE_SERVER_SSL
+          value: "true"
+        - name: CERT_PATH
+          value: /files/tls.crt
+        - name: KEY_PATH
+          value: /files/tls.key
+        volumeMounts:
+        - name: tls-cert-key
+          mountPath: "/files"
+          readOnly: true
+        {{- end }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-	  volumes: 
-	    - name: tls-cert
-		  secret:
-		    secretName: {{ .Values.ssl.certificate.secret | quote }}
-		    optional: false 
-	    - name: tls-key
-		  secret:
-		    secretName: {{ .Values.ssl.key.secret | quote }}
-		    optional: false 
+      {{- if .Values.ssl.enabled }}
+      volumes: 
+        - name: tls-cert-key
+          secret:
+            secretName: {{ .Values.ssl.secret | quote }}
+            optional: false 
+      {{- end }}
+    

@@ -23,9 +23,11 @@ spec:
     spec:
       containers:
       - env:
-	      - name: VUE_APP_SERVER_URL
-		    value: {{ .Values.backend | default "wordle-generator-app" }}
-	    image: {{ .Values.image }}:{{ .Values.tag }}
+        - name: BACKEND_SERVER
+          value: {{ .Values.backend.server | quote }}
+        - name: BACKEND_PORT
+          value: {{ .Values.backend.port | quote }}
+        image: {{ .Values.image }}:{{ .Values.tag }}
         imagePullPolicy: Always
         name: wordle-generator-app
         resources: {}

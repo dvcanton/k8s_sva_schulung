@@ -6,10 +6,16 @@ metadata:
   name: generator-rust-server
 spec:
   ports:
-  - port: {{ .Values.port }}
+  {{- if .Values.ssl.enabled }}
+  - port: 4433
     protocol: TCP
-    targetPort: {{ .Values.port }}
+    targetPort: 4433
+  {{- else }}
+  - port: 9090
+    protocol: TCP
+    targetPort: 9090
+  {{- end }}
   selector:
     app: generator-rust-server
   sessionAffinity: None
-  type: ClusterIP
+  type: NodePort

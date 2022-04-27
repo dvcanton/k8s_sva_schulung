@@ -1,0 +1,11 @@
+apiVersion: v2
+name: Rust Web Server
+version: 1.0.0
+type: application
+description: Webserver for the Wordle Generator
+keywords:
+  - wordle
+  - rust
+maintainers: # (optional)
+  - name: Dave Canton
+appVersion: 1.0.0

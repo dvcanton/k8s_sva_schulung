@@ -1,12 +1,8 @@
-
 replicas: 1
 image: dvcanton/wordle-generator-server
 tag: latest
 
-port: 4433
 ssl:
-  enable: false
-  cetificate: ""
-    secret: "tls-cert"
-  key: 
-    secret: "tls-cert"
+  enabled: false
+  secret: "tls-cert"
+  
